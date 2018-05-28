@@ -12,12 +12,13 @@ struct player
 	int score = 0;
 };
 
-int main(void) {
+int main() {
 	
 	struct player players[2];
 	char newGame;
 	count = 0;
 
+	FILE* pointer = NULL;
 	char *board = NULL;
 	board = (char*)calloc(9, sizeof(char));
 
@@ -86,20 +87,40 @@ int main(void) {
 		} while (newGame != 'y' && newGame != 'Y' && newGame != 'n' && newGame != 'N');
 	} while (newGame == 'y' || newGame == 'Y');
 
-	if (newGame == 'n' || newGame == 'N') 
+	if (newGame == 'n' || newGame == 'N')
 	{
+		pointer = fopen("ScoreHistory.txt", "a");
 		if (players[0].score > players[1].score)
 		{
 			printf("\t\t%s IS THE WINNER!!! :D\n", players[0].name);
+			if (pointer == NULL) {
+				printf("Unable to open file!\n");
+			}
+			else {
+				fprintf(pointer, "%s : %d\n%s : %d\n\n", players[0].name, players[0].score, players[1].name, players[1].score);
+			}
 		}
-		else if(players[1].score > players[0].score)
+		else if (players[1].score > players[0].score)
 		{
 			printf("\t\t%s IS THE WINNER!!! :D\n", players[1].name);
+			if (pointer == NULL) {
+				printf("Unable to open file!\n");
+			}
+			else {
+				fprintf(pointer, "%s : %d\n%s : %d\n\n", players[0].name, players[0].score, players[1].name, players[1].score);
+			}
 		}
 		else if (players[0].score == players[1].score)
 		{
 			printf("\t\tYOU ARE TIED! :)\n");
+			if (pointer == NULL) {
+				printf("Unable to open file!\n");
+			}
+			else {
+				fprintf(pointer, "%s : %d\n%s : %d\n\n", players[0].name, players[0].score, players[1].name, players[1].score);
+			}
 		}
+		fclose(pointer);
 	}
 
 	return 0;
