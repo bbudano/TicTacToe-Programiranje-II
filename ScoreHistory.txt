@@ -1,0 +1,12 @@
+Vedran : 1
+Bernard : 0
+
+Vedran : 0
+Bernard : 0
+
+Zvonimir : 0
+Bernard : 1
+
+Zvonimir : 1
+Bernard : 2
+
